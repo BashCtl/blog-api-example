@@ -11,3 +11,8 @@ class AccountOut(BaseModel):
     id: int
     name: str
     email: EmailStr
+
+
+class AccountIn(BaseModel):
+    email: EmailStr
+    password: str
