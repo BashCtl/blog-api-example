@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .core.configs import settings
-from  .api.api_v1.router import router
-from .core.database import Base, engine
+from .api.api_v1.router import router
+from .core.database import engine
+from .models import  Base
 
 Base.metadata.create_all(bind=engine)
+
 
 app = FastAPI(
     title=settings.PROJECT_NAME
