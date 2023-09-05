@@ -5,7 +5,7 @@ from sqlalchemy import pool
 from sqlalchemy import MetaData
 
 from alembic import context
-from app.models import account_model, post_model, comments_model
+from app.models import account_model, post_model, comments_model, comment_like_model, post_like_model
 from app.models.post_model import Post
 from app.models.account_model import Account
 from app.core.configs import settings
@@ -38,7 +38,9 @@ def combine_metadata(*args):
     return mdata
 
 
-target_metadata = combine_metadata(account_model.Base.metadata, post_model.Base.metadata, comments_model.Base.metadata)
+target_metadata = combine_metadata(account_model.Base.metadata, post_model.Base.metadata,
+                                   comments_model.Base.metadata, comment_like_model.Base.metadata,
+                                   post_like_model.Base.metadata)
 
 
 # other values from the config, defined by the needs of env.py,
