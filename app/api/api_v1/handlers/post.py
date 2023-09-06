@@ -11,15 +11,17 @@ posts_router = APIRouter()
 
 
 @posts_router.post("/", status_code=status.HTTP_201_CREATED, response_model=post_schema.PostOut)
-def create_post(data: post_schema.Post, db: Session = Depends(get_db),
+def create_post(data: post_schema.PostIn, db: Session = Depends(get_db),
                 current_account: Account = Depends(AuthService.get_current_user)):
     new_post = PostService.create_post(data, current_account, db)
     return new_post
 
 
 @posts_router.get("/", response_model=List[post_schema.PostOut])
-def get_all(current_account: Account = Depends(AuthService.get_current_user), db: Session = Depends(get_db)):
-    posts = PostService.get_all_posts(current_account, db)
+def get_all_account_posts(current_account: Account = Depends(AuthService.get_current_user),
+                          db: Session = Depends(get_db),
+                          limit: int = 10, skip: int = 0):
+    posts = PostService.get_all_account_posts(current_account, db, limit, skip)
     return posts
 
 
@@ -31,7 +33,7 @@ def get_post(id: int, current_account: Account = Depends(AuthService.get_current
 
 
 @posts_router.put("/{id}", status_code=status.HTTP_201_CREATED, response_model=post_schema.PostOut)
-def update_post(id: int, post: post_schema.Post, current_account: Account = Depends(AuthService.get_current_user),
+def update_post(id: int, post: post_schema.PostIn, current_account: Account = Depends(AuthService.get_current_user),
                 db: Session = Depends(get_db)):
     updated_post = PostService.update_post(id, post, current_account, db)
     return updated_post

@@ -12,3 +12,4 @@ class CommentOut(BaseModel):
     body: str
     created_at: datetime
     post: post_schema.PostOut
+    likes: int

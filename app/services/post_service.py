@@ -1,14 +1,16 @@
 from fastapi import HTTPException, status, Response
 from app.schemas import post_schema
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 from app.models.post_model import Post
 from app.models.account_model import Account
+from app.models.post_like_model import PostLike
 
 
 class PostService:
 
     @staticmethod
-    def create_post(data: post_schema.Post, account: Account, db: Session):
+    def create_post(data: post_schema.PostIn, account: Account, db: Session):
         new_post = Post(author_id=account.id, **data.model_dump())
         db.add(new_post)
         db.commit()
@@ -16,8 +18,11 @@ class PostService:
         return new_post
 
     @staticmethod
-    def get_all_posts(account: Account, db: Session):
-        posts = db.query(Post).filter(Post.author_id == account.id).all()
+    def get_all_account_posts(account: Account, db: Session, limit: int, skip: int):
+        posts = db.query(Post, func.count(PostLike.post_id).label("likes")) \
+            .join(PostLike, PostLike.post_id == Post.id, isouter=True) \
+            .group_by(Post.id).filter(Post.author_id == account.id).limit(limit).offset(skip).all()
+        posts = list(map(lambda p: p._mapping, posts))
         return posts
 
     @staticmethod
@@ -28,7 +33,7 @@ class PostService:
         return post
 
     @staticmethod
-    def update_post(id: int, post: post_schema.Post, account: Account, db: Session):
+    def update_post(id: int, post: post_schema.PostIn, account: Account, db: Session):
         post_query = db.query(Post).filter(Post.id == id, Post.author_id == account.id)
         if not post_query.first():
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id '{id}' not found.")
