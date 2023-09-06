@@ -27,7 +27,10 @@ class PostService:
 
     @staticmethod
     def get_post_by_id(id: int, account: Account, db: Session):
-        post = db.query(Post).filter(Post.id == id, Post.author_id == account.id).first()
+        post = db.query(Post, func.count(PostLike.post_id).label("likes"))\
+                .join(PostLike, PostLike.post_id==id)\
+                .group_by(Post.id)\
+                .filter(Post.id == id, Post.author_id == account.id).first()
         if not post:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id '{id}' not found.")
         return post
