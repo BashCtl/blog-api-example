@@ -2,17 +2,18 @@ version: 2.1
 
 jobs:
   test_blog:
+    working_directory: ~/project
     docker:
       - image: cimg/python:3.11.2
         environment:
           PGHOST: 127.0.0.1
-          PGUSER: $DB_USER
+          PGUSER: postgres
 
       - image: cimg/postgres:15.4
         environment:
-          POSTGRES_USER: $DB_USER
-          POSTGRES_PASSWORD: $DB_PASS
-          POSTGRES_DB: $DB_NAME
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password4
+          POSTGRES_DB: blog_api_db
     steps:
       - checkout
       - run:
