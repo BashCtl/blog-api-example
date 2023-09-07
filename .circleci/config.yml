@@ -4,6 +4,10 @@ jobs:
   test_blog:
     docker:
       - image: cimg/python:3.11.2
+        environment:
+          PGHOST: 127.0.0.1
+          PGUSER: $DB_USER
+
       - image: cimg/postgres:15.4
         environment:
           POSTGRES_USER: $DB_USER
@@ -15,8 +19,8 @@ jobs:
           name: "Check Python Version"
           command: python --version
       - run:
-          name: "Check db name"
-          command: echo $DB_NAME
+          name: "Check env"
+          command: evn
 
 
 workflows:
