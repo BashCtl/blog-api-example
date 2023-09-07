@@ -10,3 +10,8 @@ jobs:
       - run:
           name: "Check Python Version"
           command: python --version
+
+workflows:
+  commit:
+    jobs:
+      - test_blog
