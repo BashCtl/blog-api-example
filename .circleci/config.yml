@@ -20,7 +20,7 @@ jobs:
           command: python --version
       - run:
           name: "Check env"
-          command: evn
+          command: env
 
 
 workflows:
