@@ -4,7 +4,7 @@ jobs:
   test_blog:
     docker:
       - image: cimg/python:3.11.2
-      - image: cimg/postgres:15.4-postgis
+      - image: cimg/postgres:15.4
         environment:
           POSTGRES_USER: $DB_USER
           POSTGRES_PASSWORD: $DB_PASS
@@ -14,6 +14,9 @@ jobs:
       - run:
           name: "Check Python Version"
           command: python --version
+      - run:
+          name: "Check db name"
+          command: echo $DB_NAME
 
 
 workflows:
