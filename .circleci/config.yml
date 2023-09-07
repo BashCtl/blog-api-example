@@ -3,13 +3,18 @@ version: 2.1
 jobs:
   test_blog:
     docker:
-        - image: cimg/python:3.11.2
-        - image: cimg/postgres:15.4-postgis
+      - image: cimg/python:3.11.2
+      - image: cimg/postgres:15.4-postgis
+        environment:
+          POSTGRES_USER: $DB_USER
+          POSTGRES_PASSWORD: $DB_PASS
+          POSTGRES_DB: $DB_NAME
     steps:
       - checkout
       - run:
           name: "Check Python Version"
           command: python --version
+
 
 workflows:
   commit:
