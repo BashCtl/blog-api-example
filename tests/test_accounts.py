@@ -2,7 +2,7 @@ import pytest
 from jose import jwt
 from app.schemas import account_schema, token_schema
 from app.core.configs import settings
-from conftest import SQLALCHEMY_DATABASE_URL
+from .conftest import SQLALCHEMY_DATABASE_URL
 
 def test_example():
     print(SQLALCHEMY_DATABASE_URL)
