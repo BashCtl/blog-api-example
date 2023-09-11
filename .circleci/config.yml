@@ -3,17 +3,14 @@ version: 2.1
 
 jobs:
   test_blog:
-    parameters:
-      db_name:
-        type: string
-        default: DB_NAME
+
     docker:
       - image: cimg/python:3.11.2
       - image: cimg/postgres:15.4
         environment:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: rockthedog
-          POSTGRES_DB: << parameters.db_name >>
+#          POSTGRES_PASSWORD: rockthedog
+          POSTGRES_DB: blog_api_db
 
     steps:
       - checkout
