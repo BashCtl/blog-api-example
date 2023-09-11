@@ -18,7 +18,7 @@ jobs:
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: rockDog44
-          POSTGRES_DB: << parameters.db_name >>
+          POSTGRES_DB: CIRCLE_JOB
 
     steps:
       - checkout
