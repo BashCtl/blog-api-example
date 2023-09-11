@@ -3,7 +3,7 @@ version: 2.1
 parameters:
   db_name:
     type: string
-    default: $DB_NAME
+    default: DB_NAME
 
 jobs:
   test_blog:
