@@ -1,5 +1,10 @@
 version: 2.1
 
+parameters:
+  db_name:
+    type: string
+    default: $DB_NAME
+
 jobs:
   test_blog:
     docker:
@@ -8,7 +13,7 @@ jobs:
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: rockthedog
-          POSTGRES_DB: blog_api_db
+          POSTGRES_DB: << pipeline.parameters.db_name >>
 
     steps:
       - checkout
