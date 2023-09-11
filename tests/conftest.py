@@ -7,7 +7,7 @@ from app.core.configs import settings
 from app.models import Base
 from app.core.database import get_db
 from app.services.auth_service import AuthService
-from app.app import app
+from app.run import app
 from app.models import post_model, post_like_model, account_model, comments_model, comment_like_model
 
 SQLALCHEMY_DATABASE_URL = (f"postgresql+psycopg://{settings.DB_USER}:{settings.DB_PASS}@{settings.DB_URI}"
