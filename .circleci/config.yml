@@ -3,6 +3,7 @@ version: 2.1
 
 jobs:
   test_blog:
+
     parameters:
       db_pass:
         type: env_var_name
@@ -11,14 +12,13 @@ jobs:
         type: env_var_name
         default: DB_NAME
 
-
     docker:
       - image: cimg/python:3.11.2
       - image: cimg/postgres:15.4
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: rockDog44
-          POSTGRES_DB: blog_api_db
+          POSTGRES_DB: << parameters.db_name >>
 
     steps:
       - checkout
