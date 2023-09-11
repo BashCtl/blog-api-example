@@ -7,12 +7,12 @@ jobs:
       - image: cimg/python:3.11.2
         environment:
           PGHOST: localhost
-          PGUSER: ${DB_USER}
+          PGUSER: DB_USER
 
       - image: cimg/postgres:15.4
         environment:
-          POSTGRES_USER: ${DB_USER}
-          POSTGRES_PASSWORD: ${DB_PASS}
+          POSTGRES_USER: DB_USER
+          POSTGRES_PASSWORD: DB_PASS
           POSTGRES_DB: blog_api_db
     steps:
       - checkout
