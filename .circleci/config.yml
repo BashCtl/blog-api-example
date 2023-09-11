@@ -7,8 +7,7 @@ jobs:
       - image: cimg/postgres:15.4
         environment:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: DB_PASS
-          POSTGRES_DB: blog_api_db
+          POSTGRES_PASSWORD: rockthedog
 
     steps:
       - checkout
