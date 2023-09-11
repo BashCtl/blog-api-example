@@ -3,8 +3,10 @@ from jose import jwt
 from app.schemas import account_schema, token_schema
 from app.core.configs import settings
 from .conftest import SQLALCHEMY_DATABASE_URL
+import os
 
 def test_example():
+    print(os.environ)
     print(SQLALCHEMY_DATABASE_URL)
     assert 7 == 3 + 4
 
