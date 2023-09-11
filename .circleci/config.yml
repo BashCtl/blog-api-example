@@ -3,7 +3,7 @@ version: 2.1
 parameters:
   db_name:
     type: string
-    default: DB_NAME
+    default: $DB_NAME
 
 jobs:
   test_blog:
@@ -34,6 +34,7 @@ jobs:
           command: |
             ls -l
             pwd
+            echo << pipeline.parameters.db_name >>
       - run:
           name: "Run Tests"
           command: pytest -v --full-trace
