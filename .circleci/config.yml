@@ -5,7 +5,7 @@ jobs:
   test_blog:
     parameters:
       db_name:
-        type: env_var_name
+        type: string
         default: DB_NAME
     docker:
       - image: cimg/python:3.11.2
