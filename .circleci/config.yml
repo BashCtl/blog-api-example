@@ -8,6 +8,7 @@ jobs:
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: rockthedog
+          POSTGRES_DB: blog_api_db
 
     steps:
       - checkout
