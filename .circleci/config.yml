@@ -31,7 +31,6 @@ jobs:
           command: |
             ls -l
             pwd
-            echo << pipeline.parameters.db_name >>
       - run:
           name: "Run Tests"
           command: pytest -v --full-trace
