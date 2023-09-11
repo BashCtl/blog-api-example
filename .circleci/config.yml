@@ -6,7 +6,7 @@ jobs:
       - image: cimg/python:3.11.2
       - image: cimg/postgres:15.4
         environment:
-          POSTGRES_USER: DB_USER
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: DB_PASS
           POSTGRES_DB: DB_NAME
 
