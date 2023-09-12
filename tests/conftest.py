@@ -11,7 +11,7 @@ from app.run import app
 from app.models import post_model, post_like_model, account_model, comments_model, comment_like_model
 
 SQLALCHEMY_DATABASE_URL = (f"postgresql+psycopg://{settings.DB_USER}:{settings.DB_PASS}@{settings.DB_URI}"
-                           f":{settings.DB_PORT}/{settings.DB_NAME}_test")
+                           f":{settings.DB_PORT}/{settings.TEST_DB_NAME}")
 
 
 
